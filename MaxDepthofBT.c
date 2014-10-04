@@ -1,5 +1,6 @@
 /*
  * 这一题可以充分体现递归思想的优势
+ * 非递归大概80行，递归5行
  */
 #include <stdio.h>
 #include <stdlib.h>
@@ -85,7 +86,6 @@ int recv_maxdep(struct TreeNode* root)  //递归解
         return 0;
     int left = recv_maxdep(root->left);
     int right = recv_maxdep(root->right);
-    
     return left > right ? left + 1 : right + 1;
 }
 int main()
