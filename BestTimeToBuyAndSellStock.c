@@ -1,4 +1,4 @@
-//测github contribution显示:
+//测试github contribution显示
 #include <stdio.h>
 #include <stdlib.h>
 int maxProfit(int prices[], int n)
