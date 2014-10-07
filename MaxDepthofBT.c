@@ -1,9 +1,3 @@
-/*
- * 这一题可以充分体现递归思想的优势
- * 非递归大概80行，递归5行
- */
-#include <stdio.h>
-#include <stdlib.h>
 
 struct TreeNode {
     int val;
