@@ -1,5 +1,3 @@
-#include <stdio.h>
-#include <stdlib.h>
 //循环递归
 void nEleSet(int A[], int n, int set[], int k, int index, int beg)
 {
@@ -27,12 +25,6 @@ void subsets(int A[], int n)
     for (i = 1; i <= n; i++)
         nEleSet(A, n, set, i, 0, 0);
     return;
-}
-int main()
-{
-    int data[] = {1, 2, 3};
-    subsets(data, 3);
-    return 0;
 }
 
 //C++迭代方法，该解法的思考角度很有意思
