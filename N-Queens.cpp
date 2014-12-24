@@ -1,4 +1,4 @@
-//把棋盘上(row,col)处皇后能攻击到的所有棋盘格的值设为val
+//把棋盘上(row,col)处皇后能攻击到的所有棋盘格的值都加上val，val的值为1或-1
 void setattack(vector<vector<int> > &chess, int row, int col, int val)
 {
     int i, j;
