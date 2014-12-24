@@ -1,4 +1,3 @@
-//把棋盘上(row,col)处皇后能攻击到的所有棋盘格的值都加上val，val的值为1或-1
 void setattack(vector<vector<int> > &chess, int row, int col, int val)
 {
     int i, j;
@@ -32,23 +31,11 @@ void setattack(vector<vector<int> > &chess, int row, int col, int val)
     }
 }
 
-string generatestr(int pos, int size)
-{
-    string str;
-    int i;
-    for (i = 0; i < size; i++)
-        str.push_back('.');
-    str[pos] = 'Q';
-
-    return str;
-}
-
-void buildsolute(vector<vector<string> > &result, vector<vector<int> > &chess,
-        vector<string> &solution, int row)
+void buildsolute(vector<vector<int> > &chess, int row, int *res)
 {
     if (row == chess.size())
     {
-        result.push_back(solution);
+        (*res)++;
         return;
     }
 
@@ -56,26 +43,23 @@ void buildsolute(vector<vector<string> > &result, vector<vector<int> > &chess,
     {
         if (chess[row][i] == 0)
         {
-            solution.push_back(generatestr(i, chess[row].size()));
             setattack(chess, row, i, 1);
-            buildsolute(result, chess, solution, row + 1);
-            solution.pop_back();
+            buildsolute(chess, row + 1, res);
             setattack(chess, row, i, -1);
         }
     }
 }
-vector<vector<string> > solveNQueens(int n)
+
+int totalNQueens(int n)
 {
-    vector<vector<string> > result;
     vector<vector<int> >    chess;
-    vector<string>  solution;
     //初始化棋盘 
     vector<int>     row(n, 0);
+    int result = 0;
     for (int i = 0; i < n; i++)
         chess.push_back(row);
 
-    buildsolute(result, chess, solution, 0);
-
+    buildsolute(chess, 0, &result);
     return result;
 }
 
