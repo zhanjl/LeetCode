@@ -1,51 +1,24 @@
-
+/*
+ * 如果从A出发不能经过B，则下一个起始节点应该是B+1
+ */
 int canCompleteCircuit(vector<int> &gas, vector<int> &cost)
 {
-    vector<int> left;
-    int i, j, sum, start, oldstart;
-    //首先求出从每个节点运动到下一个ie节点后所剩余的气量
+    int i, sum, total, start;
+    sum = 0;
+    total = 0;
+    start = 0;
     for (i = 0; i < gas.size(); i++)
-        left.push_back(gas[i] - cost[i]);
-
-    start = 0;  //初始起始节点设为0
-    while (true)
     {
-        vector<int> cur;
-        sum = 0;
-        i = start;
-        while (true)
+        sum = sum + gas[i] - cost[i];
+        if (sum < 0)
         {
-            sum += left[i];
-            //sum小于0,表示不能通过节点i
-            if (sum < 0)
-                break;
-            //存储通过节点i所剩下的气量
-            cur.push_back(sum);
-            i = (i + 1) % gas.size();
-            if (i == start)
-                break;
-        }
-        //有两种特殊情况1,left[start] < 0，2,走完一圈
-        if (i == start && cur.size() != 0)
-            break;
-        //寻找下一个起始节点
-        for (j = 0; j < cur.size(); j++)
-        {
-            if (cur[j] < left[(start+j)%gas.size()])
-                break;
-        }
-        oldstart = start;
-        if (j == cur.size())
-            start = (i + 1) % gas.size();
-        else
-            start = (start + j) % gas.size();
-
-        if (start <= oldstart)
-        {
-            start = -1;
-            break;
+            total += sum;
+            sum = 0;
+            start = i + 1;
         }
     }
-
+     
+    start = (total + sum) >= 0 ? start : -1;
     return start;
 }
+
