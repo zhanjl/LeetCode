@@ -1,3 +1,6 @@
+
+
+
 int canJump(int A[], int n)
 {
     int index;
