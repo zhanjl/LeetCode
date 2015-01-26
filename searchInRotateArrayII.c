@@ -73,7 +73,8 @@ bool search(int A[], int n, int target)
     while (low <= high)
     {
         mid = (low + high) / 2;
-        if (A[mid] == target)   return true;
+        if (A[mid] == target)   
+            return true;
 
         if (A[mid] < A[low])
         {
