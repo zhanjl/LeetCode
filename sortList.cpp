@@ -1,12 +1,4 @@
-#include <iostream>
-using namespace std;
-
-struct ListNode {
-    int     val;
-    ListNode *next;
-    ListNode(int x) : val(x), next(NULL) { }
-};
-
+//使用快排会超时，所以要使用归并排序
 ListNode* mergeSort(ListNode *beg, ListNode *end)
 {
     if (beg == end) {
@@ -91,30 +83,3 @@ ListNode *sortList(ListNode *head)
     return newhead;
 }
 
-int main()
-{
-    int num, val;
-    ListNode *head, *cur, *prev;
-    cin >> num;
-     
-    cin >> val;
-    head = new ListNode(val);
-    prev = head;
-    num--;
-    while (num > 0) {
-        cin >> val;
-        cur = new ListNode(val);
-        prev->next = cur; 
-        prev = cur;
-        num--;
-    }
-     
-    head = sortList(head);
-
-    while (head) {
-        cout << head->val << endl;
-        head = head->next;
-    }
-     
-    return 0;
-}
