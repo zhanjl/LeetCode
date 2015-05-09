@@ -1,7 +1,3 @@
-#include <iostream>
-#include <string>
-#include <algorithm>
-using namespace std;
 string mulAdd(string num1, string num2, int offset)
 {
     string result;
@@ -15,14 +11,15 @@ string mulAdd(string num1, string num2, int offset)
         remainder = mul / 10;
     } 
 
-    while ((index - offset)< num2.size()) {
+    while ((index - offset) < num2.size()) {
         mul = (num2[index-offset] - '0') + remainder;
         result.push_back(mul%10 + '0');
         remainder = mul / 10;
         index++;
     }
-
-    return result;
+    if (remainder != 0) {
+        result.push_back(remainder + '0');
+    } return result;
 }
 
 string multiply(string num1, string num2)
@@ -30,8 +27,10 @@ string multiply(string num1, string num2)
     string result, temp;
     int remainder, mul;
     if (!num1.size() || !num2.size())
-        return result;
-    
+       return result;
+    //特殊情况，有一个数字为0,则结果为0
+    if (num1[0] == '0' || num2[0] == '0')
+        return string("0");    
     if (num1.size() < num2.size()) {
         temp = num1;
         num1 = num2;
@@ -54,18 +53,16 @@ string multiply(string num1, string num2)
         if (result.size() == 0) {
             result = cur;
         } else {
-            cout << cur << " " << result << " ";
+            //cout << result << endl;
+            int offset = i;
+           // while (offset--)
+           //     cout<<"0";
+          //  cout << cur << endl;
             result = mulAdd(result, cur, i);
-            cout << result << endl;
+          //  cout << result << endl;
         }
     }
     reverse(result.begin(), result.end());
     return result;
 }
 
-int main()
-{
-    string num1("123456789"), num2("987654321");
-    multiply(num1, num2);
-    return 0;
-}
