@@ -10,13 +10,13 @@ int divide(int dividend, int divisor)
     if (dividend == MIN_INT && divisor == -1)
         return MAX_INT;
 
-    unsigned end, sor;
+    long long end, sor;
 
-    end = abs(dividend);
-    sor = abs(divisor);
+    end = llabs((long long)dividend);
+    sor = llabs((long long)divisor);
 
-    unsigned res = 0;
-    unsigned pow, temp;
+    long long res = 0;
+    long long pow, temp;
     while (end >= sor) {
         pow = 1;
         temp = sor;
